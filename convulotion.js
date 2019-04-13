@@ -158,7 +158,7 @@ class Tensor
 		return this.data + tensor.data
 	*/
 	{	
-		
+
 		return 0;
 	}
 
@@ -354,7 +354,6 @@ class Tensor
 		this method recieves a tensor and returns the multiplication with it's tensor
 	*/
 	{
-
 
 	}
 }
