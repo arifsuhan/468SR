@@ -245,28 +245,39 @@ class Tensor
 	*/
 	{	
 
-		var temp;
-
 		if(this.rank() == 4)
 		{
-			//console.log(this.rank());
-
-			var copy = Array(this.shape()[0]).fill(0);
-			console.log();
 			
-			// for (var i = 0 ; i< this.array.length; i++) {
-			// 	for (var j = 0 ; j< this.array[i].length; j++){
-			// 		for (var k = 0 ; k< this.array[i][j].length; k++){
-			// 			for (var l = 0 ; l< this.array[i][j][k].length; l++)
-			// 			{
-			// 				temp = temp[i][j][k][l];
-			// 				temp[i][j][k][l] = temp[i][j][l][k];
-			// 				temp[i][j][l][k] = temp;
-			// 			}
-			// 		}
-			// 	}
-			// }
 
+			var copy = new Array(this.array.length);
+
+			for (var i = 0; i < this.array.length; i++) {
+			    copy[i] = new Array(this.array[0].length);
+			    for (var j = 0; j < this.array[0].length; j++) {
+			        copy[i][j] = new Array(this.array[0][0].length);
+			        for (var k = 0; k < this.array[0].length; k++) {
+			        	copy[i][j][k] = new Array(this.array[0][0].length);
+			        	for (var l = 0; l < this.array[0].length; l++) {
+			        		copy[i][j][k][l] = 0;
+			        	}
+			        }
+			    }
+			}
+			//console.log(new Tensor(copy).shape());
+			
+			
+			for (var i = 0 ; i< this.array.length; i++) {
+				for (var j = 0 ; j< this.array[i].length; j++){
+					for (var k = 0 ; k< this.array[i][j].length; k++){
+						for (var l = 0 ; l< this.array[i][j][k].length; l++)
+						{	
+							copy[i][j][l][k] = this.array[i][j][k][l];
+						}
+					}
+				}
+			}
+
+			return copy;
 		}
 
 		else if(this.rank() == 2)
@@ -275,25 +286,14 @@ class Tensor
 
 			// int[][] temp = new int[columns][rows];
 
-			var copy = [];
+			var copy = [[],[]];
 
 			for (var i = 0 ; i< this.array.length; i++) {
 				for (var j = 0 ; j< this.array[i].length; j++){
-
-					// if(this.array[i][j] === undefined)
-					// {
-					// 	continue;
-					// }
-
-					if (copy[j] === undefined)
-					{
-						copy[j] = [];
-					}
 				    copy[j][i] = this.array[i][j];
-				 	//this.array[j][i] = this.array[i][j];
 				}
 			}
-			console.log(copy);
+			return copy;
 		}
 		else
 		{
