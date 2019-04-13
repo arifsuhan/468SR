@@ -357,4 +357,30 @@ class Tensor
 
 
 	}
+
+
+	addBias(tensor)
+	{
+		if (this.shape()[0] ===  tensor.shape()[0])
+		{
+			//this bias can be added
+			for(var i =0; i<this.shape()[0]; i++)
+			{
+				for(var j =0; j<this.shape()[1]; j++)
+				{
+					for(var k =0; k<this.shape()[2]; k++)
+					{
+						for(var l =0; l<this.shape()[3]; l++)
+							this.array[i][j][k][l] = this.array[i][j][k][l] + tensor.array[i];
+					}
+				}
+
+			}
+		}
+		else
+		{
+			//bias invalid
+			console.log('bias invalid');
+		}
+	}
 }

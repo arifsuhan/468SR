@@ -67,3 +67,6 @@ fabric.properties
 
 #Ds
 .DS_Store
+.idea
+.idea/*
+weights.json
