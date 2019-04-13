@@ -250,19 +250,23 @@ class Tensor
 		if(this.rank() == 4)
 		{
 			//console.log(this.rank());
-		
-			for (var i = 0 ; i< this.array.length; i++) {
-				for (var j = 0 ; j< this.array[i].length; j++){
-					for (var k = 0 ; k< this.array[i][j].length; k++){
-						for (var l = 0 ; l< this.array[i][j][k].length; l++)
-						{
-							temp = temp[i][j][k][l];
-							temp[i][j][k][l] = temp[i][j][l][k];
-							temp[i][j][l][k] = temp;
-						}
-					}
-				}
-			}
+
+			var copy = Array(this.shape()[0]).fill(0);
+			console.log();
+			
+			// for (var i = 0 ; i< this.array.length; i++) {
+			// 	for (var j = 0 ; j< this.array[i].length; j++){
+			// 		for (var k = 0 ; k< this.array[i][j].length; k++){
+			// 			for (var l = 0 ; l< this.array[i][j][k].length; l++)
+			// 			{
+			// 				temp = temp[i][j][k][l];
+			// 				temp[i][j][k][l] = temp[i][j][l][k];
+			// 				temp[i][j][l][k] = temp;
+			// 			}
+			// 		}
+			// 	}
+			// }
+
 		}
 
 		else if(this.rank() == 2)
