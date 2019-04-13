@@ -18,6 +18,16 @@ reshape
 traspose
 
 constant
+
+0 0 0 0 0 
+0 1 2 3 0
+0 1 2 3 0
+0 1 2 3 0
+0 0 0 0 0
+3x3
+(3+1+1) x (3+1+1)
+5x5
+
 */
 
 function conv(tensor, kernel, pad, stride, weight, bias)
@@ -45,14 +55,50 @@ function pad(tensor, size)
 		return tensor;
 	}
 	else
-	{
-		for(var i = 0 ; i< size; i++ )
+	{	
+		var addPad = tensor.shape()[0]+ 2*size;
+		var zero =[0];
+		var upDown = [Array(addPad).fill(0)];
+
+		for(var i=0; i<tensor.shape()[0];i++)
 		{
-			tensor.shape().length;
+			for(var j=0; j<tensor.shape()[1];j++)
+			{
+				for(var k=0; k<tensor.shape()[2];k++)
+				{
+					tensor.array[i][j][k] = zero.concat(tensor.array[i][j][k]);
+					tensor.array[i][j][k] = tensor.array[i][j][k].concat(zero);
+				}
+			}
 		}
+
+		//up zeros pad
+		for(var i=0; i<tensor.shape()[0];i++)
+		{
+			for(var j=0; j<tensor.shape()[1];j++)
+			{
+				tensor.array[i][j] = upDown.concat(tensor.array[i][j]);
+			}
+		}
+		
+		//down zeros pad
+		for(var i=0; i<tensor.shape()[0];i++)
+		{
+			for(var j=0; j<tensor.shape()[1];j++)
+			{
+				tensor.array[i][j] = tensor.array[i][j].concat(upDown);
+			}
+		}
+
+		console.log(tensor.array[0][0]);
+		//console.log(tensor);
+		
+		return 0;
 	}
 	
 }
+
+
 
 function relu (tensor) 
 /*
@@ -111,8 +157,9 @@ class Tensor
 		this method returns concatened  tesor whith the tensor in parametres
 		return this.data + tensor.data
 	*/
-	{
-		return new Tensor(this.array.concat(tensor.array));
+	{	
+		
+		return 0;
 	}
 
 	add(tensor)
