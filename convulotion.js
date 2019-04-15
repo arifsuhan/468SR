@@ -30,6 +30,22 @@ constant
 
 */
 
+function convolve(tensor, filter) 
+{
+	var sum = 0;
+	for (var i = 0; i < tensor.length; i++ )
+	{
+		for (var j=0; j < tensor[0].length; j++)
+		{
+			sum+= tensor[i][j] * filter[i][j];
+		}
+	}
+
+	return sum;
+
+
+}
+
 function conv(tensor, kernel, pad, stride, weight, bias)
 /*
 this is the final BOSS method of this project if we can write this we are 
@@ -41,6 +57,83 @@ returns tensor
 */
 {
 
+	// horizontal side by side 
+	// vertical up down
+	console.log("Tensor: ", tensor.shape());
+	console.log("kernel: ", kernel);
+	console.log("Pad: ",pad);
+	console.log("Stide: ",stride);
+	console.log("weight: ",weight);
+	console.log("bias: ",bias);
+
+	// var o = [
+	// 	[5,3,2,1,7],
+	// 	[9,2,1,3,2],
+	// 	[9,4,5,3,7],
+	// 	[1,6,7,8,1],
+	// 	[2,0,5,3,6]
+	// ]
+
+	// var p1 = [
+	// 	[0, -1, 0],
+	// 	[-1, 5,-1],
+	// 	[0, -1, 0]	
+	// ]
+
+	// /*
+	// 00 01 02
+	// 10 11 12
+	// 20 21 22
+
+	// 01 02 03
+	// 11 12 13
+	// 21 22 23
+
+	// 02 03 04
+	// 12 13 14
+	// 22 23 24
+	// */
+
+	// var s = [1,1];
+
+	// //console.log(o);
+
+	// var counter = 0 ,sum = 0;
+
+	// var newArray = [];
+
+	// for(var i=0; i< o.length - p1.length+1; i+=s[0])
+	// {
+	// 	for(var j=0; j<o[0].length - p1[0].length+1; j+=s[1])
+	// 	{	
+
+	// 		//sum = o[i][j]*k[i][j] +
+
+
+
+	// 		for(var k=0; k< p1[0].length ; k++)
+	// 		{
+	// 			//console.log( i+k,j ,"x", k ,counter , "|" , i+k,j+1 ,"x", k, counter+1, "|" ,i+k,j+2, "x", k ,counter+2);
+	// 			//sum += o[i+k][j] * p1[k][counter] + o[i+k][j+1] * p1[k][counter+1] + o[i+k][j+2] * p1[k][counter+2]; 
+	// 			newArray.push([ o[i+k][j]  , o[i+k][j+1] , o[i+k][j+2]] ) ; 
+	// 		}
+
+	// 		sum = convolve(newArray, p1 );
+
+	// 		console.log(newArray);
+	// 		newArray = [];
+	// 		console.log(sum);
+			
+	// 		counter = 0;
+	// 		//console.log("b1");
+	// 		// console.log(i,j   , "|" , i,j+1 ,  "|" ,i  ,j+2 );
+	// 		// console.log(i+1,j , "|" , i+1,j+1, "|" ,i+1,j+2 );
+	// 		// console.log(i+2,j , "|" , i+2,j+1, "|" ,i+2,j+2 );
+	// 	}
+	// 	//console.log("break");
+	// }
+
+	// //console.log(k);
 }
 
 function pad(tensor, size)
@@ -159,6 +252,7 @@ class Tensor
 	*/
 	{	
 
+		this.array.concat()
 		return 0;
 	}
 
