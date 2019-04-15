@@ -90,10 +90,10 @@ function pad(tensor, size)
 			}
 		}
 
-		console.log(tensor.array[0][0]);
+		//console.log(tensor.array[0][0]);
 		//console.log(tensor);
 		
-		return 0;
+		return tensor;
 	}
 	
 }
@@ -354,7 +354,9 @@ class Tensor
 		this method recieves a tensor and returns the multiplication with it's tensor
 	*/
 	{
-
+		this.iterator(tensor,function(x,y){
+			return x*y;
+		});
 	}
 
 
