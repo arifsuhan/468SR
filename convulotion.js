@@ -30,6 +30,18 @@ constant
 
 */
 
+
+
+
+function array_mul(arg)
+{
+	let mul = 1;
+	for (var i = 0; i< arg.length ; i++)
+	{
+		mul*=arg[i];
+	}
+}
+
 function padding(tensor, size)
 /*
 	this function will recieve a tensor and add padding to it
@@ -210,7 +222,7 @@ function constant (tensor)
 tnis metod will return a constant tensor
 */
 {
-	return const tensor;
+	return tensor;
 }
 
 
@@ -242,6 +254,7 @@ class Tensor
 		    return [];
 		}
 	}
+
 
 
 	concatTensor(tensor)
@@ -295,6 +308,14 @@ class Tensor
 		the shape matches. 
 	*/
 	{
+		if(array_mul(this.shape()) === array_mul(shape))
+		{
+			//this reshape is acceptable
+		}
+		else
+		{
+			throw Error("Invalid reshape size")
+		}
 
 	}
 
@@ -385,7 +406,7 @@ class Tensor
 	*/
 	{	
 
-		if(this.rank() == 4)
+		if(this.rank() === 4)
 		{
 			
 
@@ -420,7 +441,7 @@ class Tensor
 			return copy;
 		}
 
-		else if(this.rank() == 2)
+		else if(this.rank() === 2)
 		{
 			console.log("2d rank transpose");
 
@@ -452,6 +473,14 @@ class Tensor
 		});
 	}
 
+	flat()
+	{
+	var ret =  this.array.flat();
+	while(ret[0] instanceof Array)
+		ret = ret.flat();
+	return ret;
+	}
+
 
 	addBias(tensor)
 	{
@@ -477,4 +506,6 @@ class Tensor
 			console.log('bias invalid');
 		}
 	}
+
+
 }
