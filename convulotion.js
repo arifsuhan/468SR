@@ -30,7 +30,30 @@ constant
 
 */
 
+function array_with_length(length, val) {
 
+	var arr = [];
+	for(var i=0; i<length; i++)
+	{
+		arr.push(val)
+	}
+	return arr;
+}
+
+function array_with_shape(shape) {
+	arr = [];
+	for (var i = shape.length - 1; i >= 0; i--) {
+		if(i == shape.langht - 1)
+		{
+			arr = array_with_length(shape[i],0)
+		}
+		else
+		{
+			arr = array_with_length(shape[i],arr)
+		}
+	}
+	return arr;
+}
 
 
 function array_mul(arg)
@@ -310,7 +333,43 @@ class Tensor
 	{
 		if(array_mul(this.shape()) === array_mul(shape))
 		{
-			//this reshape is acceptable
+			var arr = array_with_shape(shape);
+			var temp = this.flat();
+			var f = 0;
+
+			if(shape.length == 4)
+			{
+				//4D tensor
+				for (var i = 0 ; i< shape[0]; i++) {
+				for (var j = 0 ; j< shape[1]; j++){
+					for (var k = 0 ; k< shape[2]; k++){
+						for (var l = 0 ; l< shape[3]; l++)
+						{
+							arr[i][j][k][l] = temp[f];
+							f++;
+						}
+					}
+				}
+			}
+			}
+			else if(shape.length == 3)
+			{
+				//3D tensor
+				for (var i = 0 ; i< shape[0]; i++) {
+				for (var j = 0 ; j< shape[1]; j++){
+					for (var k = 0 ; k< shape[2]; k++){
+													
+						arr[i][j][k] = temp[f];
+						f++;
+						
+					}
+				}
+
+			}
+			return new Tensor(arr);
+
+			}
+
 		}
 		else
 		{
