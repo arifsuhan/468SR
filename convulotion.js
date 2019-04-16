@@ -124,15 +124,15 @@ function filterApply(tensor, filter)
 {
 	var sum = 0;
 
-	console.log(tensor.length,filter.length)
+	//console.log(tensor.length,filter.length)
 
-	// for (var i = 0; i < tensor.length; i++ )
-	// {
-	// 	for (var j=0; j < tensor[0].length; j++)
-	// 	{
-	// 		sum+= tensor[i][j] * filter[i][j];
-	// 	}
-	// }
+	for (var i = 0; i < tensor.length; i++ )
+	{
+		for (var j=0; j < tensor[0].length; j++)
+		{
+			sum+= tensor[i][j] * filter[i][j];
+		}
+	}
 
 	return sum;
 }
@@ -222,9 +222,6 @@ returns tensor
 
 	
 }
-
-
-
 
 
 function relu (tensor) 
@@ -330,7 +327,8 @@ class Tensor
 		this method rehapes the tensor into desired shape if the multiplication of 
 		the shape matches. 
 	*/
-	{
+	{	
+		//console.log(shape);
 		if(array_mul(this.shape()) === array_mul(shape))
 		{
 			var arr = array_with_shape(shape);
