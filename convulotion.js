@@ -41,7 +41,7 @@ function array_with_length(length, val) {
 }
 
 function array_with_shape(shape) {
-	arr = [];
+	var arr = [];
 	for (var i = shape.length - 1; i >= 0; i--) {
 		if(i == shape.langht - 1)
 		{
@@ -363,10 +363,33 @@ class Tensor
 					}
 				}
 
+				}
+			
 			}
-			return new Tensor(arr);
+
+			else if( shape.length == 2)
+			{ //2D tensor 
+
+				for (var i = 0 ; i< shape[0]; i++) {
+				for (var j = 0 ; j< shape[1]; j++){
+													
+						arr[i][j] = temp[f];
+						f++;
+						
+					
+				}
+
+				}
 
 			}
+
+			else if(shape.length == 1)
+			{
+				return new Tensor(temp);
+			}
+
+
+			return new Tensor(arr);
 
 		}
 		else
