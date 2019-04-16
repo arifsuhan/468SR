@@ -30,113 +30,7 @@ constant
 
 */
 
-function convolve(tensor, filter) 
-{
-	var sum = 0;
-	for (var i = 0; i < tensor.length; i++ )
-	{
-		for (var j=0; j < tensor[0].length; j++)
-		{
-			sum+= tensor[i][j] * filter[i][j];
-		}
-	}
-
-	return sum;
-
-
-}
-
-function conv(tensor, kernel, pad, stride, weight, bias)
-/*
-this is the final BOSS method of this project if we can write this we are 
-basically done with it sigh! 
-this method recieves output of last layer and kernel size and stride and weight,
-bias and performs convulotion on it.
-
-returns tensor
-*/
-{
-
-	// horizontal side by side 
-	// vertical up down
-	console.log("Tensor: ", tensor.shape());
-	console.log("kernel: ", kernel);
-	console.log("Pad: ",pad);
-	console.log("Stide: ",stride);
-	console.log("weight: ",weight);
-	console.log("bias: ",bias);
-
-	// var o = [
-	// 	[5,3,2,1,7],
-	// 	[9,2,1,3,2],
-	// 	[9,4,5,3,7],
-	// 	[1,6,7,8,1],
-	// 	[2,0,5,3,6]
-	// ]
-
-	// var p1 = [
-	// 	[0, -1, 0],
-	// 	[-1, 5,-1],
-	// 	[0, -1, 0]	
-	// ]
-
-	// /*
-	// 00 01 02
-	// 10 11 12
-	// 20 21 22
-
-	// 01 02 03
-	// 11 12 13
-	// 21 22 23
-
-	// 02 03 04
-	// 12 13 14
-	// 22 23 24
-	// */
-
-	// var s = [1,1];
-
-	// //console.log(o);
-
-	// var counter = 0 ,sum = 0;
-
-	// var newArray = [];
-
-	// for(var i=0; i< o.length - p1.length+1; i+=s[0])
-	// {
-	// 	for(var j=0; j<o[0].length - p1[0].length+1; j+=s[1])
-	// 	{	
-
-	// 		//sum = o[i][j]*k[i][j] +
-
-
-
-	// 		for(var k=0; k< p1[0].length ; k++)
-	// 		{
-	// 			//console.log( i+k,j ,"x", k ,counter , "|" , i+k,j+1 ,"x", k, counter+1, "|" ,i+k,j+2, "x", k ,counter+2);
-	// 			//sum += o[i+k][j] * p1[k][counter] + o[i+k][j+1] * p1[k][counter+1] + o[i+k][j+2] * p1[k][counter+2]; 
-	// 			newArray.push([ o[i+k][j]  , o[i+k][j+1] , o[i+k][j+2]] ) ; 
-	// 		}
-
-	// 		sum = convolve(newArray, p1 );
-
-	// 		console.log(newArray);
-	// 		newArray = [];
-	// 		console.log(sum);
-			
-	// 		counter = 0;
-	// 		//console.log("b1");
-	// 		// console.log(i,j   , "|" , i,j+1 ,  "|" ,i  ,j+2 );
-	// 		// console.log(i+1,j , "|" , i+1,j+1, "|" ,i+1,j+2 );
-	// 		// console.log(i+2,j , "|" , i+2,j+1, "|" ,i+2,j+2 );
-	// 	}
-	// 	//console.log("break");
-	// }
-
-	// //console.log(k);
-}
-
-function pad(tensor, size)
+function padding(tensor, size)
 /*
 	this function will recieve a tensor and add padding to it
 	depending on the size
@@ -190,6 +84,111 @@ function pad(tensor, size)
 	}
 	
 }
+
+function filterApply(tensor, filter) 
+{
+	var sum = 0;
+
+	console.log(tensor.length,filter.length)
+
+	// for (var i = 0; i < tensor.length; i++ )
+	// {
+	// 	for (var j=0; j < tensor[0].length; j++)
+	// 	{
+	// 		sum+= tensor[i][j] * filter[i][j];
+	// 	}
+	// }
+
+	return sum;
+}
+
+function conv2dTensor(tensor, kernel, pad, stride, weight,bias)
+{
+	var row = tensor.shape()[0] - kernel[0]+1;
+	var col = tensor.shape()[1] - kernel[1]+1;
+
+	var newArray = [];
+	var storeArray = [];
+
+	for(var i=0; i< row; i+=stride)
+	{
+		storeArray.push(Array(col).fill(0));
+	}
+
+	for(var i=0; i< row; i+=stride)
+	{
+		for(var j=0; j< col; j+=stride)
+		{	
+			for(var k=0; k< kernel[0] ; k++)
+			{
+				newArray.push([ tensor.array[i+k][j], tensor.array[i+k][j+1], tensor.array[i+k][j+2] ]); 
+			}
+
+
+			console.log(newArray.length);
+			sum = filterApply( newArray, weight );
+			newArray=[];
+			//console.log(sum);
+			
+
+			storeArray[i][j] = sum;
+		}
+	}
+
+	// console.log(storeArray);
+
+	return storeArray;
+}
+
+function conv(tensor, kernel, pad, stride, weight, bias)
+/*
+this is the final BOSS method of this project if we can write this we are 
+basically done with it sigh! 
+this method recieves output of last layer and kernel size and stride and weight,
+bias and performs convulotion on it.
+
+returns tensor
+*/
+{
+
+	/*
+	horizontal side by side 
+	vertical up down
+	*/
+
+	console.log("Tensor: ", tensor.shape());
+	// console.log("kernel: ", kernel);
+	// console.log("Pad: ",pad);
+	// console.log("Stide: ",stride);
+	console.log("weight: ",weight.shape());
+	// console.log("bias: ",bias.shape());
+
+	//tensor = padding(tensor,pad[2]);
+	//console.log("Tensor: ", tensor.shape());
+	//console.log("Tensor: ", tensor);
+
+	counter = 0;
+
+	for(var i=0; i< weight.shape()[0]; i++)
+	{
+		for(var j=0; j< weight.shape()[1]; j++)
+		{	
+			//console.log(new Tensor(tensor.array[i][j]).shape());
+			//console.log( tensor.array[i] );
+			// tensor.array[i][j] = conv2dTensor(new Tensor(tensor.array[i][j]),kernel,pad,stride,weight,bias);
+
+			//console.log(conv2dTensor(new Tensor(tensor.array[i][j]),kernel,pad,stride,weight.array[i][j],bias));
+			//console.log(counter);
+			//counter+=1;
+		}
+	}
+
+	//console.log("Tensor: ", tensor);
+
+	
+}
+
+
 
 
 
@@ -252,7 +251,7 @@ class Tensor
 	*/
 	{	
 
-		this.array.concat()
+		//this.array.concat();
 		return 0;
 	}
 
