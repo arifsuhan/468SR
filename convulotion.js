@@ -210,7 +210,7 @@ function constant (tensor)
 tnis metod will return a constant tensor
 */
 {
-	
+	return const tensor;
 }
 
 
