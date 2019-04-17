@@ -129,7 +129,10 @@ function filterApply(tensor, filter)
 }
 
 function conv2dTensor(tensor, kernel, pad, stride, weight,bias)
-{
+{	
+
+	
+	
 	var row = tensor.length - kernel[0]+1;
 	var col = tensor[0].length - kernel[1]+1;
 
@@ -142,21 +145,20 @@ function conv2dTensor(tensor, kernel, pad, stride, weight,bias)
 	}
 
 	//console.log(weight);
-	//console.log(tensor[0].length);
+	//console.log(row,col);
 
 	for(var i=0; i< row; i+=stride)
 	{
 		for(var j=0; j< col; j+=stride)
 		{	
 
-			newArray.push([tensor[i][j],tensor[i][j+1],tensor[i][j+2]]); 
-			newArray.push([tensor[i+1][j],tensor[i+1][j+1],tensor[i+1][j+2]]); 
-			newArray.push([tensor[i+2][j],tensor[i+2][j+1],tensor[i+2][j+2]]); 
+			newArray.push([ tensor[i][j], tensor[i][j+1], tensor[i][j+2] ]); 
+			newArray.push([ tensor[i+1][j], tensor[i+1][j+1], tensor[i+1][j+2] ]); 
+			newArray.push([ tensor[i+2][j], tensor[i+2][j+1], tensor[i+2][j+2] ]); 
 
 			// for(var k=0; k< kernel[0] ; k++)	
 			// {	
-
-			// 	//newArray.push([ tensor.array[i+k][j], tensor.array[i+k][j+1], tensor.array[i+k][j+2] ]); 
+			// 		newArray.push([ tensor.array[i+k][j], tensor.array[i+k][j+1], tensor.array[i+k][j+2] ]); 
 			// }
 
 			//console.log(newArray.length);
