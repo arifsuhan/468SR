@@ -3,6 +3,8 @@
 <html>
 <head>
 	<title>Try</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 	<link rel="stylesheet" type="text/css" href="lib/css/style.css">
 </head>
 
@@ -28,15 +30,23 @@
 </body>
 
 <!-- import pretrain model -->
-<script src="model/proSR.json"></script>
-<script src="model/layer1.json"></script>
+<!-- <script src="lib/model/fake.json"></script> -->
+<script src="lib/model/data.json"></script>
 
 <!-- super resolution task -->
-<script src="tensor.js"></script> 
-<script src="convulotion.js"></script>
-<script src="lib/js/imgTensor.js"></script> 
+<script src="lib/js/tensor.js"></script>
+<script src="lib/js/convulotion.js"></script>  
+
+<script src="lib/fake/fakeFunction.js"></script>
 <script src="lib/js/network.js"></script>
-<script src="lib/js/main.js"></script> 
-<script src="lib/js/layer.js"></script>
+
+<!-- <script src="lib/fake/fakeNetwork.js"></script>  -->
+<script src="lib/js/test_layer.js"></script>
+
+
+<!-- <script src="lib/js/imgTensor.js"></script> 
+<script src="lib/js/network.js"></script>
+<script src="lib/js/imgTensor.js"></script>
+<script src="lib/js/main.js"></script>  -->
 
 </html>
