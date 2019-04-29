@@ -70,3 +70,4 @@ fabric.properties
 .idea
 .idea/*
 weights.json
+fake.json
