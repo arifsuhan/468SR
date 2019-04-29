@@ -1,7 +1,7 @@
 # 468SR
 
 ```
-Try to use browser like : Firefox 
+Try to use powerful browser like Firefox.
 Please don't use Google Chrome!!!
 ```
 
