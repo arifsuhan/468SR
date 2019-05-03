@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.12)  2 MAY 2019 19:46
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.13)  2 MAY 2019 17:02
+>>>>>>> c2326cd09d45795bc18df7092c4b3932f67e852c
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -219,6 +223,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2018basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<<<<<<< HEAD
 <prosr.png, id=12, 1065.9825pt x 416.55624pt>
 File: prosr.png Graphic file (type png)
 <use prosr.png>
@@ -245,6 +250,58 @@ Output written on article.pdf (5 pages, 227322 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream
+=======
+<prosr.png, id=11, 1065.9825pt x 416.55624pt>
+File: prosr.png Graphic file (type png)
+<use prosr.png>
+Package pdftex.def Info: prosr.png  used on input line 52.
+(pdftex.def)             Requested size: 331.25061pt x 129.44255pt.
+ [2 <./prosr.png>]
+
+! Package inputenc Error: Unicode character   (U+2028)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.64 ...e Gecko,while Google chrome uses Blink. 
+                                                  During the loading of Json...
+
+? 
+
+! Package inputenc Error: Unicode character   (U+2028)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.64 ... loads the Json file smoothly and fast. 
+                                                  Never shows the any sign o...
+
+? 
+[3] (./article.bbl) [4] (./article.aux) ) 
+Here is how much of TeX's memory you used:
+ 2187 strings out of 494091
+ 30130 string characters out of 6163523
+ 93921 words of memory out of 5000000
+ 5838 multiletter control sequences out of 15000+600000
+ 8703 words of font info for 33 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 41i,6n,25p,968b,201s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018basic/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018
+basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2
+018basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on article.pdf (4 pages, 221473 bytes).
+PDF statistics:
+ 44 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
+>>>>>>> c2326cd09d45795bc18df7092c4b3932f67e852c
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
