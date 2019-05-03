@@ -1,0 +1,91 @@
+\documentclass[a4paper,12pt]{article}
+
+% AMS packages:
+\usepackage{amsmath, amsthm, amsfonts}
+\usepackage{graphicx}
+
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords:}} #1}
+
+%-----------------------------------------------------------------
+\title
+{
+	Challenges to convert Super Resolution GAN
+}
+
+
+
+\author
+{
+	Omar Faruk Riyad  \\
+	1610634042 \\ 
+	North South University  \\
+	\and 
+	Arif Suhan \\
+	1610437042 \\
+	North South University  \\
+}
+
+\begin{document}
+\maketitle
+
+\abstract
+{
+	Deep learning approaches to single image super resolution have \\
+	achieved impressive results in terms of traditional error measures and \\
+	perceptual quality. We focused on the area where we could reduce the load over network and run on browser. To achieve this , we have faced a lot of challenges like loading the weight of pre-train model or running the network model in browser. As we are using pure vanilla javascript , we also have faced lack of libraries. When it’s time to load weight and compute the network function , the browser cache crossed it’s limitation.For solving these challenges , many solutions are crossed through our mind. After so many testing , we take the best solutions. Still some challenges are not solved.
+} 
+
+% \keywords{ideal of sets; nowhere dense; analytic}
+
+\section{Introduction}
+Reducing network load while transfering data has been the great challenge of computer science since the dawn of the internet. Since the most transferred data over the network are image data, if we could get high resolution images from low resolution could save the network load by significant amount. We wanted to try out a working mechanism that could achieve this particular goal while leaving the heavy duty on the user's computer. The state-of - the-art architecture ProSR is one of the best ways to retain image information to convert a low resolutionresolution image to high resolution. The mechanism that we tried was to perform the computation on the browser side. while the data sent by the server is low resolution image later it will be generated as high resolution. To make a dense model to work in the browser is a challenging task. Along with the dense layer they have also used bicubic interpolation layer by layer to make the high resolution even better for this particular model. The sole purpose of chosing a complex network is exploration the compatebility issues over variations of interfaces, in this case pure JavaScript without any libraries.
+
+\section{Model Description}
+
+\subsection{DenseNet}
+Dense networks are the next step in increasing the profundities of deep convolutional networks. When CNNs go deeper, the problems arise. This is because the path from the input layer for information becomes so large that it can disappear before reaching the other part of the output layer (and the gradient is in the opposite direction). DenseNets simplify the pattern of connectivity among layers in other architectures. 
+
+\subsection{ProSR GAN}
+Generative adversarial networks (GANs) have emerged as a powerful method to enhance the perceptual quality of the upsampled images in SISR.The model ProSR contained a dense layer and a dense compression unit. The model also used bicubic interpolation and addition with some of the layer output, for which it is one of the expensive model to perform computation with. But the result produced by this ProSR is amazing interms of quality of produced the image.
+\cite{ref1}
+\\
+\includegraphics[width=\linewidth]{prosr.png}
+
+\section{Challenges}
+
+\subsection{Converting Model}
+The first problem we got in order to get farther with the idea is to convert the model to JavaScript natively. We tried out a bunch of different method to convert the model but because of the model contained dense layer, it was really difficult to put into code since the sequence of the network has to be followed. We found that we could easily convert PyTorch model into a  Open Neural Network Exchange (ONNX) model, from the base of ONNX it performs operations in Pure Basic Language. We extracted the Pure Basic Model code from the ONNX model, from which we found the underlying repeated network in the right sequence of its weights. We found that there are 610 layers in the neural network and had about 7 operations which also have multiple different parameters. Pure Basic laguage is similar to native JavaScript, by perfroming some regex operation the code we easily converted it to a native JavaScript code. 
+
+This was the most easiest challenges that we had to face over the entire time working with this project.
+
+\subsection{Weight to JSON}
+The next challenge that we had to face is to convert weights and load it to the browser. Converting the model weights to JSON was complex but it was easily done. Here again we used the ONNX model to get the weights from since our model network was generated from the same model. The model had all weights in the sequence that we needed it to be thus parsing the wieghts wasn't difficult. At first we worked with float32 data to have better precessions but the loading time was taking more that what we expected. Also the file size gotten about 345MB even after minifying the JSON file. It was a challenge to fix because we had to lower the file size and make it work at the same time because the broser coudln't cope up with the file. We solved this issue by reducing the weights from float32 to float16 which required less data and less memory size. It was not a easy thing thing to do but we had to chose float16 because all of our operations were running in the CPU. We made work in the cost of losing pricisions.
+
+\subsection{Engine Compatability}
+At first we were using Goole Chrome to run our tests. Google chorme runs on chromev8 engine which we couldn't make it load the weighs json faster. On the other hand the firefox usage spidermonkey engine that makes faster to load the weights. And chrome used charsh which the in firefox didn't.
+
+\subsection{Performing Operations Issue }
+Most of the used of the browser does not have GPU support since the whole idea of exploration was CPU based
+
+\subsection{Computation Issue}
+Computation with the model was higher than we expected. Since it had a huge amount of weight and layers to it and the model used bicubic and previous layer output farther down the network it had to store a lot of data to the memory. We tried some of the low res images to convert them to high resolution but we failed. 
+
+
+\section{What to expect}
+If we could solve all these problems we could have faster data transmission for which the network could be reduced to more than 25\% by assumption.
+
+\section{Evalution}
+\subsection{Run Time}
+On runtime, we have seen that the model proSR usage 28GB of Memory to perform computation.
+
+\section{Conclusion}
+ In our exploration, we have seen that computing in browser are high costly to run operation. With efficient highly rich library, we hope this problems can be solved.Many other problems are also exists. The idea of using deep learing in the browser could open up new opprotunities in the realm of computer vision problems. 
+
+% \subsection{Subsection}\label{sec:nothing}
+
+% Bibliography
+%-----------------------------------------------------------------
+\bibliographystyle{plain}
+\bibliography{reference.bib}
+
+\end{document}
